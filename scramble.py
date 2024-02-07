@@ -14,6 +14,8 @@ except Exception as e:
 stack = []
 pc = 0
 
+def pop(index = -1):
+
 # push value -> CRACK
 # pop value -> SERVE
 # add top 2 values -> BEAT
