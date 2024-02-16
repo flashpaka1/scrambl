@@ -12,19 +12,75 @@ except Exception as e:
     sys.exit()
 
 stack = []
-pc = 0
+count = 0
+dinnerPlate = ''
 
-# push value -> CRACK
-# pop value -> SERVE
-# add top 2 values -> BEAT
-# subtract top 2 values -> STRAIN
-# multiply top 2 values -> MAKEANOMELETTE
-# divide top 2 values -> SCRAMBLE
-# leave program -> EAT
-# copy top value -> INCUBATE
-# switch top 2 values -> FLIP
-# pop top as ASCII -> FRY
-# pop top as int -> POACH
-# drop stack -> BURN
-# repeat top value n times as ascii -> BATCH
-# repeat top value n times as int -> CARTON
+def err(str):
+    print("\n" + str + f" at line {count}")
+    sys.exit(0)
+
+def pop(index=-1):
+    if len(stack) < 1:
+        err("Error: Stack underflow")
+    return stack.pop(index)
+
+while count >= 0 and count < len(readLines):
+    parts = readLines[count].split(" ")
+    cmd = parts[0]
+
+    if cmd == 'CRACK':
+        stack.append(int(parts[1]))  # push value
+    elif cmd == 'SERVE':
+        print(pop())  # pop value
+    elif cmd == 'BEAT':
+        x = pop()
+        stack[-1] += x  # add top 2 values
+    elif cmd == 'STRAIN':
+        x = pop()
+        stack[-1] -= x  # subtract top 2 values
+    elif cmd == 'MAKEANOMELETTE':
+        x = pop()
+        stack[-1] *= x  # multiply top 2 values
+    elif cmd == 'SCRAMBLE':
+        x = pop()
+        stack[-1] /= x  # divide top 2 values
+    elif cmd == 'CRY':
+        break  # leave program
+    elif cmd == 'INCUBATE':
+        stack.append(stack[-1])  # copy top value
+    elif cmd == 'FLIP':
+        x = pop()
+        y = pop()
+        stack.append(x)
+        stack.append(y)  # switch top 2 values
+    elif cmd == 'FRY':
+        print(chr(pop()))  # pop top as ASCII
+    elif cmd == 'POACH':
+        print(int(pop()))  # pop top as int
+    elif cmd == 'BURN':
+        stack = []  # drop stack
+    elif cmd == 'BATCH':
+        if len(parts) < 2 or parts[1] == '':
+            err("Error: Missing argument for BATCH command")
+        for i in range(int(parts[1])):
+            stack.append(chr(stack[-1]))  # repeat top value n times as ASCII
+
+    elif cmd == 'OVEREASY':
+        for i in range(int(parts[1])):
+            stack.append(int(stack[-1]))  # repeat top value n times as int
+    elif cmd == "EAT":
+      try:
+         stack.append(ord(input("")[0]))   
+      except IndexError:
+         stack.append(0)
+    elif cmd == 'ORDER':
+        x = input("")
+        for char in x:
+            stack.append(ord(char)) # get string input
+    elif cmd == 'DEVILLE':
+        for i in range((int(stack[-1]))):
+            print(chr(pop()))  # pop all as ASCII
+
+    count += 1
+
+print('')
