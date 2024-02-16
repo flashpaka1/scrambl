@@ -44,7 +44,7 @@ while count >= 0 and count < len(readLines):
     elif cmd == 'SCRAMBLE':
         x = pop()
         stack[-1] /= x  # divide top 2 values
-    elif cmd == 'EAT':
+    elif cmd == 'CRY':
         break  # leave program
     elif cmd == 'INCUBATE':
         stack.append(stack[-1])  # copy top value
