@@ -60,8 +60,11 @@ while count >= 0 and count < len(readLines):
     elif cmd == 'BURN':
         stack = []  # drop stack
     elif cmd == 'BATCH':
+        if len(parts) < 2 or parts[1] == '':
+            err("Error: Missing argument for BATCH command")
         for i in range(int(parts[1])):
             stack.append(chr(stack[-1]))  # repeat top value n times as ASCII
+
     elif cmd == 'OVEREASY':
         for i in range(int(parts[1])):
             stack.append(int(stack[-1]))  # repeat top value n times as int
@@ -70,6 +73,13 @@ while count >= 0 and count < len(readLines):
          stack.append(ord(input("")[0]))   
       except IndexError:
          stack.append(0)
+    elif cmd == 'ORDER':
+        x = input("")
+        for char in x:
+            stack.append(ord(char)) # get string input
+    elif cmd == 'DEVILLE':
+        for i in range((int(stack[-1]))):
+            print(chr(pop()))  # pop all as ASCII
 
     count += 1
 
