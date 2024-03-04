@@ -18,3 +18,4 @@ Scrambl is a stack-based esoteric programming language designed for making progr
 | OVEREASY n        | Repeats the top value of the stack n times as an integer.     |
 | EAT               | Takes user input and pushes its ASCII code onto the stack.     |
 | ORDER             | Takes string input and pushes its ASCII codes onto the stack.  |
+| DEVILLE           | Pops the whole stack as ASCII                                  |
