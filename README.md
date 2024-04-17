@@ -10,7 +10,7 @@ Scrambl is a stack-based esoteric programming language designed for making progr
 | SCRAMBLE          | Divides the second value by the top value on the stack.        |
 | CRY               | Terminate program execution.                                   |
 | INCUBATE          | Copies the top value of the stack and pushes it onto the stack.|
-| FLIP              | Switches the positions of the top two values on the stack.     |
+| FLIP              | Reverses the input here to push it in correct order.           |
 | FRY               | Pops the top value of the stack and prints it as an ASCII character.|
 | POACH             | Pops the top value of the stack and prints it as an integer.  |
 | BURN              | Clears the stack.                                              |
@@ -18,3 +18,4 @@ Scrambl is a stack-based esoteric programming language designed for making progr
 | OVEREASY n        | Repeats the top value of the stack n times as an integer.     |
 | EAT               | Takes user input and pushes its ASCII code onto the stack.     |
 | ORDER             | Takes string input and pushes its ASCII codes onto the stack.  |
+| BOIL              | Prints without newline and space between characters            |
