@@ -31,7 +31,9 @@ while count >= 0 and count < len(readLines):
     if cmd == 'CRACK':
         stack.append(int(parts[1]))  # push value
     elif cmd == 'SERVE':
-        print(pop())  # pop value
+        length = len(stack)
+        for i in range(length):
+            print(chr(pop()), end='')
     elif cmd == 'BEAT':
         x = pop()
         stack[-1] += x  # add top 2 values
@@ -49,10 +51,9 @@ while count >= 0 and count < len(readLines):
     elif cmd == 'INCUBATE':
         stack.append(stack[-1])  # copy top value
     elif cmd == 'FLIP':
-        x = pop()
-        y = pop()
-        stack.append(x)
-        stack.append(y)  # switch top 2 values
+        x = input()
+        for char in reversed(x):  # Reverse the input here to push it in correct order
+            stack.append(ord(char))
     elif cmd == 'FRY':
         print(chr(pop()))  # pop top as ASCII
     elif cmd == 'POACH':
@@ -64,7 +65,6 @@ while count >= 0 and count < len(readLines):
             err("Error: Missing argument for BATCH command")
         for i in range(int(parts[1])):
             stack.append(chr(stack[-1]))  # repeat top value n times as ASCII
-
     elif cmd == 'OVEREASY':
         for i in range(int(parts[1])):
             stack.append(int(stack[-1]))  # repeat top value n times as int
@@ -80,6 +80,10 @@ while count >= 0 and count < len(readLines):
     elif cmd == 'DEVILLE':
         for i in range((int(stack[-1]))):
             print(chr(pop()))  # pop all as ASCII
+    elif cmd == 'BOIL':
+        length = len(stack)
+        for i in range(length):
+            print(chr(pop()), end='')  # Print without newline and space between characters
 
     count += 1
 
