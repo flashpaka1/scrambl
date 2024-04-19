@@ -60,15 +60,21 @@ while count >= 0 and count < len(readLines):
         print(int(pop()))  # pop top as int
     elif cmd == 'BURN':
         stack = []  # drop stack
-    elif cmd == 'BATCH':
-        if len(parts) < 2 or parts[1] == '':
-            err("Error: Missing argument for BATCH command")
+    elif cmd == 'BITE': # take input as int
+        stack.append(int(input()))
+    elif cmd == 'BATCH': # This will push `x` onto the stack `n` times
+        if len(stack) < 2:
+            err("Error: Stack underflow at BATCH command")
+        n = int(pop())
+        if not isinstance(n, int):
+            err("Error: Non-integer value for repetition count")
+        x = pop()
+        for _ in range(n):
+            stack.append(x)
+    elif cmd == 'OVEREASY': # repeat top value n times as int
         for i in range(int(parts[1])):
-            stack.append(chr(stack[-1]))  # repeat top value n times as ASCII
-    elif cmd == 'OVEREASY':
-        for i in range(int(parts[1])):
-            stack.append(int(stack[-1]))  # repeat top value n times as int
-    elif cmd == "EAT":
+            stack.append(int(stack[-1]))  
+    elif cmd == "EAT": # take input as ASCII
       try:
          stack.append(ord(input("")[0]))   
       except IndexError:
