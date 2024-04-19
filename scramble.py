@@ -31,7 +31,9 @@ while count >= 0 and count < len(readLines):
     if cmd == 'CRACK':
         stack.append(int(parts[1]))  # push value
     elif cmd == 'SERVE':
-        print(pop())  # pop value
+        length = len(stack)
+        for i in range(length):
+            print(chr(pop()), end='')
     elif cmd == 'BEAT':
         x = pop()
         stack[-1] += x  # add top 2 values
@@ -49,26 +51,30 @@ while count >= 0 and count < len(readLines):
     elif cmd == 'INCUBATE':
         stack.append(stack[-1])  # copy top value
     elif cmd == 'FLIP':
-        x = pop()
-        y = pop()
-        stack.append(x)
-        stack.append(y)  # switch top 2 values
+        x = input()
+        for char in reversed(x):  # Reverse the input here to push it in correct order
+            stack.append(ord(char))
     elif cmd == 'FRY':
         print(chr(pop()))  # pop top as ASCII
     elif cmd == 'POACH':
         print(int(pop()))  # pop top as int
     elif cmd == 'BURN':
         stack = []  # drop stack
-    elif cmd == 'BATCH':
-        if len(parts) < 2 or parts[1] == '':
-            err("Error: Missing argument for BATCH command")
+    elif cmd == 'BITE': # take input as int
+        stack.append(int(input()))
+    elif cmd == 'BATCH': # This will push `x` onto the stack `n` times
+        if len(stack) < 2:
+            err("Error: Stack underflow at BATCH command")
+        n = int(pop())
+        if not isinstance(n, int):
+            err("Error: Non-integer value for repetition count")
+        x = pop()
+        for _ in range(n):
+            stack.append(x)
+    elif cmd == 'OVEREASY': # repeat top value n times as int
         for i in range(int(parts[1])):
-            stack.append(chr(stack[-1]))  # repeat top value n times as ASCII
-
-    elif cmd == 'OVEREASY':
-        for i in range(int(parts[1])):
-            stack.append(int(stack[-1]))  # repeat top value n times as int
-    elif cmd == "EAT":
+            stack.append(int(stack[-1]))  
+    elif cmd == "EAT": # take input as ASCII
       try:
          stack.append(ord(input("")[0]))   
       except IndexError:
@@ -80,6 +86,10 @@ while count >= 0 and count < len(readLines):
     elif cmd == 'DEVILLE':
         for i in range((int(stack[-1]))):
             print(chr(pop()))  # pop all as ASCII
+    elif cmd == 'BOIL':
+        length = len(stack)
+        for i in range(length):
+            print(chr(pop()), end='')  # Print without newline and space between characters
 
     count += 1
 
